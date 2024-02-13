@@ -2,14 +2,18 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-contract RPS {
+import './CommitReveal.sol';
+
+contract RPS is CommitReveal{
     struct Player {
         uint choice; // 0 - Rock, 1 - Paper , 2 - Scissors, 3 - undefined
         address addr;
     }
     uint public numPlayer = 0;
+    uint public numReveal = 0;
     uint public reward = 0;
     mapping (uint => Player) public player;
+    mapping (address => uint) public playerIndex;
     uint public numInput = 0;
 
     function addPlayer() public payable {
@@ -17,21 +21,32 @@ contract RPS {
         require(msg.value == 1 ether);
         reward += msg.value;
         player[numPlayer].addr = msg.sender;
+        playerIndex[msg.sender] = numPlayer;
         player[numPlayer].choice = 3;
         numPlayer++;
     }
 
-    function input(uint choice, uint idx) public  {
+    function input(bytes32 hashedChoice) public  {
         require(numPlayer == 2);
-        require(msg.sender == player[idx].addr);
-        require(choice == 0 || choice == 1 || choice == 2);
-        player[idx].choice = choice;
+        require(msg.sender == player[playerIndex[msg.sender]].addr);
+        commit(hashedChoice);
         numInput++;
-        if (numInput == 2) {
+    }
+
+    function choiceHash(uint choice,uint password) public view returns(bytes32) {
+        require(choice == 0 || choice == 1 || choice == 2,"invalid choice");
+        return getSaltedHash(bytes32(choice), bytes32(password));
+    }
+    function revealsChoice(uint choice,uint password) public{
+        require(numInput == 2);
+        require(choice == 0 || choice == 1 || choice == 2,"invalid choice");
+        revealAnswer(bytes32(choice),bytes32(password));
+        player[playerIndex[msg.sender]].choice = choice;
+        numReveal++;
+        if (numReveal == 2) {
             _checkWinnerAndPay();
         }
     }
-
     function _checkWinnerAndPay() private {
         uint p0Choice = player[0].choice;
         uint p1Choice = player[1].choice;

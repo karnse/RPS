@@ -1,0 +1,286 @@
+{
+	"compiler": {
+		"version": "0.8.24+commit.e11b9ed9"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "dataHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "block",
+						"type": "uint64"
+					}
+				],
+				"name": "CommitHash",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "answer",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "salt",
+						"type": "bytes32"
+					}
+				],
+				"name": "RevealAnswer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "revealHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "random",
+						"type": "uint256"
+					}
+				],
+				"name": "RevealHash",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "addPlayer",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "choice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "password",
+						"type": "uint256"
+					}
+				],
+				"name": "choiceHash",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "hashedChoice",
+						"type": "bytes32"
+					}
+				],
+				"name": "input",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "numInput",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "numPlayer",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "numReveal",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "player",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "choice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "playerIndex",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "choice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "password",
+						"type": "uint256"
+					}
+				],
+				"name": "revealsChoice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "reward",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"RPS.sol": "RPS"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"CommitReveal.sol": {
+			"keccak256": "0xb0c3aeb078a6fc7e7db49c1638fc4b519e54a1a4b0df874328ba230837bda549",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://6d6a7dafce084c519b97801283c853f1389b9e5507bcee0aa8dc10823b92c06e",
+				"dweb:/ipfs/QmZv7EFNVXjioYjEWi7kXSMyv56Zqwm1Nj3cdv5jC7czid"
+			]
+		},
+		"RPS.sol": {
+			"keccak256": "0x0526f713e82d7abb0fc90914fb276bc1f91c9b8e020793d198c77926b1e5bed0",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://f8393e7f112ba4cb215b5a560a266b0401735dc61fcfa94faff639ea0ec46888",
+				"dweb:/ipfs/QmZ16DZZaHvZWyAXZ1EY1iSh5AkAAp3EmWPRUyqVeg21T5"
+			]
+		}
+	},
+	"version": 1
+}
