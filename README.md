@@ -27,6 +27,8 @@
 player 1: lose
 <br/>
 player 2: win
+![image](https://github.com/karnse/RPS/assets/88821340/11cb274d-92d9-4c25-a701-0a0fbf44709c)
 
-##draw
+## draw
+![image](https://github.com/karnse/RPS/assets/88821340/2a503819-3136-46c7-a9be-0201177372f6)
 
