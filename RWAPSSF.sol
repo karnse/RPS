@@ -4,7 +4,7 @@ pragma solidity >=0.7.0 <0.9.0;
 
 import './CommitReveal.sol';
 
-contract RPS is CommitReveal{
+contract RWAPSSF is CommitReveal{
     struct Player {
         uint choice; // 0 - Rock, 1 - Paper , 2 - Scissors, 3 - undefined
         address addr;
