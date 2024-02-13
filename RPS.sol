@@ -12,9 +12,80 @@ contract RPS is CommitReveal{
     uint public numPlayer = 0;
     uint public numReveal = 0;
     uint public reward = 0;
+    uint public limitTime = 10 minutes;
+    uint public updatedTimestamp;
     mapping (uint => Player) public player;
     mapping (address => uint) public playerIndex;
     uint public numInput = 0;
+
+    function cleardata() private {
+        numInput = 0;
+        numPlayer = 0;
+        numReveal = 0;
+        reward = 0;
+    }
+
+    function checkTimeOut() public {
+        require(block.timestamp+limitTime < updatedTimestamp,"in time");
+        if(numPlayer==1)
+        {
+            payable(player[0].addr).transfer(reward);
+            delete player[0];
+            cleardata();
+        }
+        else if(numPlayer==2 && numInput==0)
+        {
+            payable(player[0].addr).transfer(reward/2);
+            payable(player[1].addr).transfer(reward/2);
+            delete player[0];
+            delete player[1];
+            cleardata();
+        }
+        else if(numPlayer==2 && numInput==1)
+        {
+            if(commits[player[1].addr].commit == 0)
+            {
+                payable(player[0].addr).transfer(reward);
+                delete commits[player[0].addr];
+                delete player[0];
+                delete player[1];
+            }
+            if(commits[player[0].addr].commit == 0)
+            {
+                payable(player[1].addr).transfer(reward);
+                delete commits[player[1].addr];
+                delete player[0];
+                delete player[1];
+            }
+            cleardata();
+        }
+        else if(numPlayer == 2 && numInput == 2 && numReveal==0)
+        {
+            payable(player[0].addr).transfer(reward/2);
+            payable(player[1].addr).transfer(reward/2);
+            delete commits[player[0].addr];
+            delete commits[player[1].addr];
+            delete player[0];
+            delete player[1];
+            cleardata();
+        }
+        else if(numPlayer == 2 && numInput == 2 && numReveal==1)
+        {
+            if(commits[player[1].addr].revealed)
+            {
+                payable(player[1].addr).transfer(reward);
+            }
+            if(commits[player[0].addr].revealed)
+            {
+                payable(player[0].addr).transfer(reward);
+            }
+            delete commits[player[0].addr];
+            delete commits[player[1].addr];
+            delete player[0];
+            delete player[1];
+            cleardata();
+        }
+    }
 
     function addPlayer() public payable {
         require(numPlayer < 2);
@@ -23,7 +94,9 @@ contract RPS is CommitReveal{
         player[numPlayer].addr = msg.sender;
         playerIndex[msg.sender] = numPlayer;
         player[numPlayer].choice = 3;
+        updatedTimestamp = block.timestamp;
         numPlayer++;
+
     }
 
     function input(bytes32 hashedChoice) public  {
@@ -34,12 +107,12 @@ contract RPS is CommitReveal{
     }
 
     function choiceHash(uint choice,uint password) public view returns(bytes32) {
-        require(choice == 0 || choice == 1 || choice == 2,"invalid choice");
+        require(choice < 2);
         return getSaltedHash(bytes32(choice), bytes32(password));
     }
     function revealsChoice(uint choice,uint password) public{
         require(numInput == 2);
-        require(choice == 0 || choice == 1 || choice == 2,"invalid choice");
+        require(choice < 2);
         revealAnswer(bytes32(choice),bytes32(password));
         player[playerIndex[msg.sender]].choice = choice;
         numReveal++;
@@ -65,5 +138,10 @@ contract RPS is CommitReveal{
             account0.transfer(reward / 2);
             account1.transfer(reward / 2);
         }
+        delete commits[player[0].addr];
+        delete commits[player[1].addr];
+        delete player[0];
+        delete player[1];
+        cleardata();
     }
 }

@@ -88,6 +88,13 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "checkTimeOut",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -122,6 +129,19 @@
 				"name": "input",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "limitTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -236,6 +256,19 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "updatedTimestamp",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -274,11 +307,11 @@
 			]
 		},
 		"RPS.sol": {
-			"keccak256": "0x0526f713e82d7abb0fc90914fb276bc1f91c9b8e020793d198c77926b1e5bed0",
+			"keccak256": "0x2f4d34b21d9bc04c22f9164c88c91537e1a00dc711f8b7fab06598379c658afa",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://f8393e7f112ba4cb215b5a560a266b0401735dc61fcfa94faff639ea0ec46888",
-				"dweb:/ipfs/QmZ16DZZaHvZWyAXZ1EY1iSh5AkAAp3EmWPRUyqVeg21T5"
+				"bzz-raw://3ee5c0f31ade1f8961d9da749f87c1d773e899d099175fad23a6c01a21420322",
+				"dweb:/ipfs/QmP5zk5u4CWvQmfUWUTeb7g46WsuGQ19BU5vahBRfo6BKx"
 			]
 		}
 	},
