@@ -24,6 +24,9 @@
 
 # example of the game
 ## win lose
-player 1: win
+player 1: lose
 <br/>
-player 2: lose
+player 2: win
+
+##draw
+
