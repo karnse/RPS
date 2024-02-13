@@ -26,7 +26,7 @@ contract RWAPSSF is CommitReveal{
     }
 
     function checkTimeOut() public {
-        require(block.timestamp+limitTime < updatedTimestamp,"in time");
+        require(block.timestamp > updatedTimestamp+limitTime,"in time");
         if(numPlayer==1)
         {
             payable(player[0].addr).transfer(reward);
