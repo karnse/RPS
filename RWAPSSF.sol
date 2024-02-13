@@ -6,7 +6,7 @@ import './CommitReveal.sol';
 
 contract RWAPSSF is CommitReveal{
     struct Player {
-        uint choice; // 0 - Rock, 1 - Paper , 2 - Scissors, 3 - undefined
+        uint choice; // 0-Rock, 1-Water, 2-Air, 3-Paper, 4-Sponge, 5-Scissors, 6-Fire
         address addr;
     }
     uint public numPlayer = 0;
